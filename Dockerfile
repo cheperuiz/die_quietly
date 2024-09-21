@@ -1,4 +1,13 @@
-FROM ubuntu:latest
-LABEL authors="chepe"
+FROM python:3.10
 
-ENTRYPOINT ["top", "-b"]
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 8000
+
+ENTRYPOINT ["python", "start_tasks.py"]
